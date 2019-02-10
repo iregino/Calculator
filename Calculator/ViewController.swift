@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var operand = 0
     var answer = 0.0
     var theNumber = ""
-    var percent = 0.0
+    var percent = false
     
     @IBOutlet var resultLabel: UILabel!
     
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         if sender.tag >= 14 && sender.tag <= 17 {
             // Show error message when user press operand before entering a number
             if theNumber.isEmpty {
-                showAlert(withErrorMessage: "Enter a number")
+                showAlert(withErrorMessage: "No number entered")
             }
             else {
                 operand = sender.tag
@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         if sender.tag == 11 {
             theNumber = ""
             displayNumber()
+            percent = false
         }
     }
     
@@ -116,6 +117,26 @@ class ViewController: UIViewController {
         answer = 0.0
     }
     
+    // Determine factorial of a given whole number
+    @IBAction func factorialButtonPressed(_ sender: UIButton) {
+        
+        if theNumber.isEmpty || Int(theNumber)! < 0 {
+            showAlert(withErrorMessage: "Enter a positive number, then press ! button")
+        }
+        else {
+            let factorialNum = Int(theNumber)!
+            var total = 1
+            if factorialNum != 0 {
+                for num in 1...factorialNum {
+                    total *= num
+                }
+            }
+            theNumber = String(total)
+            displayNumber()
+            theNumber = ""
+        }
+    }
+    
     // Convert positive number to negative number and vice-versa
     @IBAction func plusMinusButtonPressed(_ sender: UIButton) {
         
@@ -137,23 +158,32 @@ class ViewController: UIViewController {
     @IBAction func percentButtonPressed(_ sender: UIButton) {
         
         if theNumber.isEmpty {
-            showAlert(withErrorMessage: "Enter a number")
+            showAlert(withErrorMessage: "No number entered")
         }
         else {
-            percent = Double(theNumber)! / 100
-            theNumber = String(percent)
+            if percent {
+                answer = Double(theNumber)! * 100
+                percent = false
+            }
+            else {
+                answer = Double(theNumber)! / 100
+                percent = true
+            }
+            theNumber = String(answer)
             displayNumber()
         }
     }
     
     // Show alert with specific error message
     func showAlert(withErrorMessage errorMsg: String) {
-        
+        // Create an alert instance
         let alert = UIAlertController(title: "Error", message: errorMsg, preferredStyle: .alert)
+        // Create an alert action
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        // Add alert action to alert instance
         alert.addAction(cancelAction)
+        // Present the alert to user
         present(alert, animated: true)
-        
     }
     
 }

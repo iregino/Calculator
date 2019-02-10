@@ -46,11 +46,11 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="97"/>
                                                 <color key="backgroundColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="35"/>
-                                                <state key="normal" title="C">
+                                                <state key="normal" title="!">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operandPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3vY-7h-jTi"/>
+                                                    <action selector="factorialButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IaT-eE-6Fw"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5e-Xx-Utw">
@@ -235,11 +235,22 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3fM-nK-V4Q">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3fM-nK-V4Q">
                                         <rect key="frame" x="0.0" y="510" width="335" height="97"/>
                                         <subviews>
+                                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9L-iE-YbY">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="97"/>
+                                                <color key="backgroundColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="35"/>
+                                                <state key="normal" title="C">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="operandPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pEL-Jj-peu"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="su2-Xr-mrO">
-                                                <rect key="frame" x="0.0" y="0.0" width="165.5" height="97"/>
+                                                <rect key="frame" x="85" y="0.0" width="80" height="97"/>
                                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="40"/>
                                                 <state key="normal" title="0">
@@ -250,7 +261,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vml-xX-bym">
-                                                <rect key="frame" x="170.5" y="0.0" width="79.5" height="97"/>
+                                                <rect key="frame" x="170" y="0.0" width="80" height="97"/>
                                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="40"/>
                                                 <state key="normal" title=".">
@@ -272,10 +283,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="UXc-oT-QS4" firstAttribute="width" secondItem="vml-xX-bym" secondAttribute="width" id="2sI-lT-iUU"/>
-                                            <constraint firstItem="vml-xX-bym" firstAttribute="width" secondItem="su2-Xr-mrO" secondAttribute="width" multiplier="1:2.07" id="lim-qD-MbF"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
