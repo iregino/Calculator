@@ -16,11 +16,10 @@ class ViewController: UIViewController {
     let minus = 16
     let plus = 17
     var num1 = 0.0
-    var num2 = 0.0
     var operand = 0
     var answer = 0.0
-    var theNumber = ""
-    var percent = false
+    var numberText = ""
+    var convertToPercent = true
     
     @IBOutlet var resultLabel: UILabel!
     
@@ -28,26 +27,25 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        displayNumber()
+        displayNumberText()
     }
     
     // Display selected number or result to resultLabel
-    func displayNumber() {
-        resultLabel.text = theNumber
+    func displayNumberText() {
+        resultLabel.text = numberText
     }
 
     // Concatenate numbers and decimal point into a string variable
     @IBAction func numberPressed(_ sender: UIButton) {
         
         if sender.tag >= 0 && sender.tag <= 9 {
-            theNumber += String(sender.tag)
-            displayNumber()
+            numberText += String(sender.tag)
         }
         // Decimal point pressed
         if sender.tag == 10 {
-            theNumber += "."
-            displayNumber()
+            numberText += "."
         }
+        displayNumberText()
     }
     
     // Clear/Operand button is pressed
@@ -56,7 +54,7 @@ class ViewController: UIViewController {
         // Save displayed number when operand button is pressed (/, *, -, +)
         if sender.tag >= 14 && sender.tag <= 17 {
             // Show error message when user press operand before entering a number
-            if theNumber.isEmpty {
+            if numberText.isEmpty {
                 showAlert(withErrorMessage: "No number entered")
             }
             else {
@@ -65,38 +63,38 @@ class ViewController: UIViewController {
             }
         }
         
-        // Reset number variable and display when clear button is pressed
+        // Reset number variable and display when CLEAR button is pressed
         if sender.tag == 11 {
-            theNumber = ""
-            displayNumber()
-            percent = false
+            numberText = ""
+            displayNumberText()
+            convertToPercent = false
         }
     }
     
     // Save the previous number
     func saveNum1() {
-        num1 = Double(theNumber)!
-        displayNumber()
-        theNumber = ""
+        num1 = Double(numberText)!
+        displayNumberText()
+        numberText = ""
     }
     
     // Calculate two numbers when equal button is pressed and display result
     @IBAction func calculate(_ sender: UIButton) {
         
         // Assign current number to working variable
-        num2 = Double(theNumber)!
+        guard let num2 = Double(numberText) else {
+            showAlert(withErrorMessage: "No number entered")
+            return
+        }
         
-        // Determine operand and perform appropriate calculation
-        if operand == plus {
+        switch operand {
+        case plus:
             answer = num1 + num2
-        }
-        if operand == minus {
+        case minus:
             answer = num1 - num2
-        }
-        if operand == multiply {
+        case multiply:
             answer = num1 * num2
-        }
-        if operand == divide {
+        case divide:
             // If user is trying to divide by zero, show an error message and don't perform division
             if num2 == 0 {
                 showAlert(withErrorMessage: "Cannot divide by zero")
@@ -104,15 +102,17 @@ class ViewController: UIViewController {
             else {
                 answer = num1 / num2
             }
+        default:
+            break
         }
  
         // Assign answer to the number variable and display the result
-        theNumber = String(answer)
-        displayNumber()
+        numberText = String(answer)
+        displayNumberText()
+        // numberText = ""
         
         // Reset working variables
         num1 = 0.0
-        num2 = 0.0
         operand = 0
         answer = 0.0
     }
@@ -120,58 +120,64 @@ class ViewController: UIViewController {
     // Determine factorial of a given whole number
     @IBAction func factorialButtonPressed(_ sender: UIButton) {
         
-        if theNumber.isEmpty || Int(theNumber)! < 0 {
-            showAlert(withErrorMessage: "Enter a positive number, then press ! button")
+        guard let theNumber = Double(resultLabel.text!) else {
+            showAlert(withErrorMessage: "No whole number entered for factorial.")
+            return
+        }
+        
+        if theNumber < 0 {
+            showAlert(withErrorMessage: "Enter a positive whole number for factorial.")
+            numberText = ""
+            displayNumberText()
+            return
         }
         else {
-            let factorialNum = Int(theNumber)!
             var total = 1
-            if factorialNum != 0 {
-                for num in 1...factorialNum {
+            if theNumber != 0 {
+                for num in 1...Int(theNumber){
                     total *= num
                 }
             }
-            theNumber = String(total)
-            displayNumber()
-            theNumber = ""
+            numberText = String(total)
+            displayNumberText()
         }
     }
     
     // Convert positive number to negative number and vice-versa
     @IBAction func plusMinusButtonPressed(_ sender: UIButton) {
         
-        if theNumber.isEmpty {
-            theNumber = "-"
+        if numberText.isEmpty {
+            numberText = "-"
         }
         else {
-            if Double(theNumber)! > 0 {
-                theNumber.insert("-", at: theNumber.startIndex)
+            if Double(numberText)! > 0 {
+                numberText.insert("-", at: numberText.startIndex)
             }
             else {
-                theNumber.remove(at: theNumber.startIndex)
+                numberText.remove(at: numberText.startIndex)
             }
         }
-        displayNumber()
+        displayNumberText()
     }
     
     // Convert whole numbers to percents
     @IBAction func percentButtonPressed(_ sender: UIButton) {
         
-        if theNumber.isEmpty {
-            showAlert(withErrorMessage: "No number entered")
+        guard let theNumber = Double(resultLabel.text!) else {
+            showAlert(withErrorMessage: "No number entered. Please enter a number and press '%' again.")
+            return
+        }
+        if convertToPercent {
+            answer = theNumber / 100
+            convertToPercent = false
         }
         else {
-            if percent {
-                answer = Double(theNumber)! * 100
-                percent = false
-            }
-            else {
-                answer = Double(theNumber)! / 100
-                percent = true
-            }
-            theNumber = String(answer)
-            displayNumber()
+            answer = theNumber * 100
+            convertToPercent = true
         }
+        numberText = String(answer)
+        displayNumberText()
+
     }
     
     // Show alert with specific error message
