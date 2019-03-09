@@ -12,4 +12,4 @@ Swift 4.2, Xcode 10
 
 ### Purpose
 
-The goal of this project is to demonstrate autolayout and constraints, control flows and math operations.
+The goal of this project is to demonstrate Horizontal and Vertical Stack Views, Autolayout and Constraints and Control Flows to build a basic calculator that could work with any device. It performs addition, subtraction, mulitiplication, division, factorial and percentage.
