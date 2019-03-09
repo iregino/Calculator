@@ -4,7 +4,7 @@
 
 This is an iPhone and iPad calculator app with factorial function.
 
-
+![calculator](https://user-images.githubusercontent.com/44620966/54077985-44460080-4286-11e9-9224-7533da84bf43.png)
 
 ### Technology
 
