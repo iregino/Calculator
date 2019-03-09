@@ -8,7 +8,7 @@ This is an iPhone and iPad calculator app with factorial function.
 
 ### Technology
 
-Swift 4.2, Xcode 10
+Swift 4.2, Xcode 10, UIKit, Interface Builder
 
 ### Purpose
 
